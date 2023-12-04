@@ -1,0 +1,98 @@
+<div class="register-tech flex justify-content-center pb-5 mb-5 mt-4 ">
+  <div class="flex flex-column justify-content-center surface-card mt-2 ml-6 mr-6 mt-2 update-education-container">
+    <form [formGroup]="updateWorkExperiencie" (ngSubmit)="onSubmit()" class=" pl-4 pr-4 pt-6 pb-2">
+      <div class="mb-4">
+        <label class="w-full block text-xl font-medium mb-2" for="role">{{'rol_desempenado'|translate}}</label>
+
+        <div class="w-full">
+          <input id="role" type="text" [placeholder]="'rol_desempenado' | translate " pInputText [class]="'w-full ' + 
+                              (roleName!.invalid && (roleName!.dirty || roleName!.touched) ? 'ng-dirty' : '')"
+            style="padding:1rem" formControlName="roleName">
+        </div>
+
+        <div class="error-form" *ngIf="roleName!.invalid && (roleName!.dirty || roleName!.touched)">
+          <span *ngIf="roleName!.errors!.required">
+            {{ 'campo_obligatorio' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="w-full block text-xl font-medium mb-2" for="empresa">{{'empresa'|translate}}</label>
+
+        <div class="w-full">
+          <input id="empresa" type="text" [placeholder]="'empresa' | translate " pInputText [class]="'w-full ' + 
+                              (companyName!.invalid && (companyName!.dirty || companyName!.touched) ? 'ng-dirty' : '')"
+            style="padding:1rem" formControlName="companyName">
+        </div>
+
+        <div class="error-form" *ngIf="companyName!.invalid && (companyName!.dirty || companyName!.touched)">
+          <span *ngIf="companyName!.errors!.required">
+            {{ 'campo_obligatorio' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="w-full block text-xl font-medium mb-2" for="descripcion">{{'descripcion'|translate}}</label>
+
+        <div class="w-full">
+          <input id="descripcion" type="text" [placeholder]="'descripcion' | translate " pInputText [class]="'w-full ' + 
+                              (description!.invalid && (description!.dirty || description!.touched) ? 'ng-dirty' : '')"
+            style="padding:1rem" formControlName="description">
+        </div>
+
+        <div class="error-form" *ngIf="description!.invalid && (description!.dirty || description!.touched)">
+          <span *ngIf="description!.errors!.required">
+            {{ 'campo_obligatorio' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="w-full block text-xl font-medium mb-2" for="datein">{{'fecha_inicio'|translate}}</label>
+
+        <div class="p-inputgroup w-full">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <p-calendar styleClass="w-full p-component p-element" id="datein" formControlName="dateStart"
+            placeholder="DD-MM-YYYY" dateFormat="dd-mm-yy"></p-calendar>
+        </div>
+
+        <div class="error-form" *ngIf="dateStart!.invalid && (dateStart!.dirty || dateStart!.touched)">
+          <span *ngIf="dateStart!.errors!.required">
+            {{ 'campo_obligatorio' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="w-full block text-xl font-medium mb-2" for="dateOut">{{'fecha_fin'|translate}}</label>
+        <div class="p-inputgroup w-full">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <p-calendar styleClass="w-full p-component p-element" id="dateOut" formControlName="dateEnd"
+            placeholder="DD-MM-YYYY" dateFormat="dd-mm-yy"></p-calendar>
+        </div>
+
+        <div class="error-form" *ngIf="dateEnd!.invalid && (dateEnd!.dirty || dateEnd!.touched)">
+          <span *ngIf="dateEnd!.errors!.invaliddate">
+            {{ 'la_fecha_inicio_no_puede_ser_mayor_a_la_fecha_fin' | translate }}
+          </span>
+        </div>
+      </div>
+      <div class="flex justify-content-end">
+        <button pButton pRipple type="button" [label]="'cancelar'|translate" 
+          class="p-button-outlined mr-5" [routerLink]="['/completar-perfil']">
+        </button>
+        <button pButton pRipple type="button" [disabled]="updateWorkExperiencie.invalid" [label]="'guardar'|translate"
+          (click)="onSubmit()">
+        </button>
+      </div>
+
+      <div class="mx-auto mt-3 w-6" *ngIf="loading">
+        <p-progressBar mode="indeterminate"></p-progressBar>
+      </div>
+    </form>
+  </div>
+</div>
+<app-custom-dialog [dataModal]="dataModal" (closeModal)="closeModal($event)" (confirmModal)="confirmModal($event)">
+</app-custom-dialog>

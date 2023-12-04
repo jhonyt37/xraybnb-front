@@ -1,0 +1,15 @@
+::ng-deep {
+    .p-multiselect {
+        width: 100%;
+    }
+}
+.search-candidate {
+    .candidate-list {
+        height: 70vh;
+        overflow-y: auto;
+    }
+
+    .search-candidate-option {
+        width: 19.5%;
+    }
+}

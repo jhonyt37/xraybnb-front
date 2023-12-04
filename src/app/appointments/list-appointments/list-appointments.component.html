@@ -1,0 +1,53 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 list-appointments">
+        <div class="text-3xl text-center font-medium mb-3" id="title-form">{{ 'citas_entrevistas' | translate }}</div>
+        <div *ngIf="totalAppointments.length > 0" class="mt-4">
+            <p-table [columns]="columns" [value]="totalAppointments" [paginator]="true" [rows]="5"
+                [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '50rem' }"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                (onPage)="pageChange($event)" [rowsPerPageOptions]="[5, 10, 50]">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            {{col.header | translate }}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            <label *ngIf="col.field!='state'">
+                                <i *ngIf="rowData.isDone && col.field=='title' && rowData.rol != 'CANDIDATO'" class="pr-2 pi pi-eye icon-color" (click)="goDetail(rowData)"></i>
+                                <i *ngIf="!rowData.isDone && col.field=='title'" style="color: green"
+                                    class="pr-2 pi pi-calendar"></i>
+                                {{ rowData[col.field] }}
+                            </label>
+                            <div *ngIf="col.field=='state'" class="flex justify-content-start flex-wrap">
+                                <p-tag [severity]="rowData.severity">
+                                    <div class="flex align-items-center gap-2">
+                                        <span *ngIf="rowData.isDone" class="text-base">{{ 'cita_finalizada' |
+                                            translate }}</span>
+                                        <span *ngIf="!rowData.isDone" class="text-base">{{ 'cita_activa' | translate
+                                            }}</span>
+                                    </div>
+                                </p-tag>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+        <div *ngIf="totalAppointments.length < 1" class="w-full h-full py-8 surface-ground px-3 sm:px-4">
+            <div class="text-center">
+                <img src="assets/images/logo.png" alt="Logo" class="mb-3" />
+            </div>
+            <div class="text-center mb-5">
+                <img src="assets/images/nombre.png" alt="Nombre empresa" class="mb-3" />
+            </div>
+            <div class="text-center">
+                <label class=" text-2xl font-bold">{{ 'sin_citas' | translate }}</label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 w-9">
+        <div class="text-3xl font-medium mb-3">{{'asignar_candidatos' | translate}}</div>
+        <form [formGroup]="addMember" (ngSubmit)="onSubmit()">
+            <div class="mb-6">
+                <label 
+                    class="w-full block text-xl font-medium mb-2"
+                    for="project">{{'proyecto'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown 
+                        [placeholder]="('seleccionar_opcion' | translate)"
+                        [options]="projectOptions"
+                        optionValue="id"
+                        optionLabel="name"
+                        formControlName="projectId"
+                        [class]="(projectId.invalid && (projectId.dirty || projectId.touched) ? 'ng-dirty' : '')" 
+                        (onChange)="onChangeProject(projectId.value)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="projectId.invalid && (projectId.dirty || projectId.touched)">
+                    <span *ngIf="projectId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label 
+                    class="w-full block text-xl font-medium mb-2"
+                    for="team">{{'equipo'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown 
+                        [placeholder]="('seleccionar_opcion' | translate)"
+                        [options]="teamsOptions"
+                        optionValue="id"
+                        optionLabel="name"
+                        formControlName="teamId"
+                        [class]="(teamId.invalid && (teamId.dirty || teamId.touched) ? 'ng-dirty' : '')" 
+                        [emptyMessage]="('sin_equipos' | translate)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="teamId.invalid && (teamId.dirty || teamId.touched)">
+                    <span *ngIf="teamId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label 
+                    class="w-full block text-xl font-medium mb-2"
+                    for="search-candidate">{{'candidato'|translate}}</label>
+                
+                <div class="w-full">
+                    <p-multiSelect 
+                        name="candidate"
+                        id="search-candidate"
+                        [options]="cadidateOptions" 
+                        formControlName="users"
+                        [placeholder]="'seleccionar_opcion'| translate"
+                        optionLabel="fullName" 
+                        class="multiselect-custom  w-full" 
+                        display="chip">
+                    </p-multiSelect>
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="users.invalid && (users.dirty || users.touched)">
+                    <span *ngIf="users.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end">
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'cancelar'|translate"
+                        class="p-button-outlined mr-5"
+                        [routerLink]="['/']">
+                </button>
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'guardar'|translate"
+                        (click)="onSubmit()">
+                </button>
+            </div>
+
+            <div 
+                class="mx-auto mt-3 w-6"
+                *ngIf="loading">
+                <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-custom-dialog
+        [dataModal]="dataModal"
+        (closeModal)="closeModal($event)"
+        (confirmModal)="confirmDialog($event)">
+</app-custom-dialog>

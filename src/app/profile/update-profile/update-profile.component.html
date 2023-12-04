@@ -1,0 +1,154 @@
+<div class="update-profile flex flex-column justify-content-center  pb-5 mb-5 mt-4">
+  <div *ngIf="candidate" class="flex grid justify-content-center surface-card mt-2 ml-6 mr-6 mt-2">
+    <form [formGroup]="profileSkills" (ngSubmit)="onSubmit()" class="w-full pl-4 pr-4 pt-2 pb-2">
+      <div class=" col-12 pt-4 ">
+        <p class="text-xl font-semibold">{{'perfil_laboral'|translate}}</p>
+        <div class="grid">
+          <div class="col-4">
+            <label class=" block text-base font-medium mb-2" for="select-languges">{{'idiomas'|translate}}</label>
+            <div class="w-full">
+              <p-multiSelect name="languge" id="select-languges" [options]="languageOptions!" formControlName="languges"
+                [placeholder]="'seleccionar_opcion'| translate" optionLabel="name" 
+                optionValue="code" class="multiselect-custom w-full "
+                display="chip">
+              </p-multiSelect>
+            </div>
+
+            <div class="error-form" *ngIf="languges!.invalid && (languges!.dirty || languges!.touched)">
+              <span *ngIf="languges!.errors!.required">
+                {{'campo_obligatorio' | translate}}
+              </span>
+            </div>
+          </div>
+          <div class="col-4">
+            <label class=" block text-base font-medium mb-2" for="select-languges">{{'habilidades'|translate}}</label>
+            <div class="w-full">
+              <p-multiSelect name="skill" id="select-skill" [options]="abilityOptions!"  formControlName="skils"
+                [placeholder]="'seleccionar_opcion'| translate" optionLabel="name" 
+                optionValue="id" class="multiselect-custom w-full "
+                display="chip">
+              </p-multiSelect>
+            </div>
+
+            <div class="error-form" *ngIf="skils!.invalid && (skils!.dirty || skils!.touched)">
+              <span *ngIf="skils!.errors!.required">
+                {{'campo_obligatorio' | translate}}
+              </span>
+            </div>
+          </div>
+          <div class="col-4">
+            <label class=" block text-base font-medium mb-2" for="role">{{'anos_experiencia'|translate}}</label>
+
+            <div class="w-full">
+              <input id="experienceYears" type="number" [placeholder]="'anos_experiencia' | translate " pInputText [class]="'w-full ' + 
+                                (experienceYears!.invalid && (experienceYears!.dirty || experienceYears!.touched) ? 'ng-dirty' : '')"
+                 formControlName="experienceYears">
+            </div>
+
+            <div class="error-form" *ngIf="experienceYears!.invalid && (experienceYears!.dirty || experienceYears!.touched)">
+              <span *ngIf="experienceYears!.errors!.required">
+                {{'campo_obligatorio' | translate}}
+              </span>
+              <span *ngIf="experienceYears!.errors!.min">
+                {{'error_formato_anos_experiencia' | translate}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pt-4 flex justify-content-end">
+          <button pButton pRipple type="button" [label]="'cancelar'|translate" class="p-button-outlined mr-5 "
+            [routerLink]="['/']">
+          </button>
+          <button pButton pRipple type="button" [disabled]="profileSkills.invalid" [label]="'guardar'|translate"
+            (click)="onSubmit()">
+          </button>
+        </div>
+        <div class="mx-auto mt-3 w-6" *ngIf="loading">
+          <p-progressBar mode="indeterminate"></p-progressBar>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="pr-4 pl-4 w-full">
+      <p class="text-xl font-semibold ">{{'educacion'|translate}}</p>
+
+      <div>
+        <p-table [value]="candidate.education" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="3"
+          [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[3, 5, 10]">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{'titulo'|translate}}</th>
+              <th>{{'fecha_inicio'|translate}}</th>
+              <th>{{'fecha_fin'|translate}}</th>
+              <th>{{'institucion'|translate}}</th>
+              <th>{{'tipo'|translate}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-edu>
+            <tr>
+              <td>{{ edu.title}}</td>
+              <td>{{ edu.dateInit}}</td>
+              <td>{{ edu.dateEnd }}</td>
+              <td>{{ edu.institution}}</td>
+              <td>{{ edu.type }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="pt-2 flex justify-content-end">
+        <button pButton pRipple type="button" class="p-button-outlined flex justify-content-center"
+        [routerLink]="['/actualizar-educacion']" [label]="'agregar'|translate">
+        <i class="pi pi-plus-circle mr-2"></i>
+      </button>
+      </div>
+    </div>
+    <div class="pr-4 pl-4 pt-2 pb-4 w-full">
+      <p class="text-xl font-semibold ">{{'experiencia_laboral'|translate}}</p>
+      <div>
+        <p-table [value]="candidate.experiences" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="3"
+          [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[3, 5, 10]">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{'cargo'|translate}}</th>
+              <th>{{'fecha_inicio'|translate}}</th>
+              <th>{{'fecha_fin'|translate}}</th>
+              <th>{{'descripcion'|translate}}</th>
+              <th>{{'empresa'|translate}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-exp>
+            <tr>
+              <td>{{ exp.job}}</td>
+              <td>{{ exp.dateInit}}</td>
+              <td>{{ exp.dateEnd }}</td>
+              <td>{{ exp.description }}</td>
+              <td>{{ exp.company }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="pt-2 flex justify-content-end">
+        <button pButton pRipple type="button" class="p-button-outlined flex justify-content-center"
+          [routerLink]="['/actualizar-experiencia-laboral']" [label]="'agregar'|translate">
+          <i class="pi pi-plus-circle mr-2"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!candidate" class="w-full h-full py-8 surface-ground px-3 sm:px-4">
+    <div class="text-center">
+        <img src="assets/images/logo.png" alt="Logo" class="mb-3" />
+    </div>
+    <div class="text-center mb-5">
+        <img src="assets/images/nombre.png" alt="Nombre empresa" class="mb-3" />
+    </div>
+    <div class="mx-auto mt-3 w-6" *ngIf="loading">
+      <p-progressBar mode="indeterminate"></p-progressBar>
+    </div>
+</div>
+</div>
+<app-custom-dialog [dataModal]="dataModal" (closeModal)="closeModal($event)" (confirmModal)="confirmModal($event)">
+</app-custom-dialog>

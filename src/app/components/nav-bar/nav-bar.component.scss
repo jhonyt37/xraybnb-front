@@ -1,0 +1,19 @@
+.layout-topbar-menu {
+
+  &__option {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &__option.session-card {
+    border-radius: 4px;
+  }
+}
+
+.layout-topbar {
+  z-index: 1;
+}

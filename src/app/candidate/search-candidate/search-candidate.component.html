@@ -1,0 +1,116 @@
+<div class="flex justify-content-center mt-5 search-candidate">
+    <div class="flex flex-column justify-content-center surface-card p-5 w-11">
+        <div class="text-3xl font-medium mb-3" id="search-title">{{'busqueda'|translate}}</div>
+
+        <form>
+            <div class="flex align-items-center justify-content-between">
+                <div class="flex flex-wrap search-candidate-option">
+                    <label 
+                        class="w-full"
+                        for="search-hability">{{'habilidades'|translate}}</label>
+                    <p-multiSelect 
+                        name="hability"
+                        id="search-hability"
+                        [options]="abilityOptions" 
+                        [(ngModel)]="selectedAbility" 
+                        [placeholder]="'seleccionar_opcion'|translate"
+                        optionLabel="name" 
+                        optionValue="id"
+                        class="multiselect-custom w-full"
+                        display="chip"
+                        (onChange)="onChangeFilter()">
+                    </p-multiSelect>
+                </div>
+    
+                <div class="flex flex-wrap search-candidate-option">
+                    <label 
+                        class="w-full"
+                        for="search-language">{{'idioma'| translate}}</label>
+                    <p-multiSelect 
+                        name="language"
+                        id="search-language"
+                        [options]="languageOptions" 
+                        [(ngModel)]="selectedLanguage"
+                        [placeholder]="'seleccionar_opcion'|translate"
+                        optionLabel="name" 
+                        optionValue="name"
+                        class="multiselect-custom  w-full" 
+                        display="chip"
+                        (onChange)="onChangeFilter()">
+                    </p-multiSelect>
+                </div>
+    
+                <div class="flex flex-wrap search-candidate-option">
+                    <label 
+                        class="w-full"
+                        for="search-location">{{'ubicacion'|translate}}</label>
+                    <p-multiSelect 
+                        name="location"
+                        id="search-location"
+                        [options]="countriesOptions" 
+                        [(ngModel)]="selectedCountry"
+                        [placeholder]="'seleccionar_opcion'|translate"
+                        optionLabel="name" 
+                        optionValue="id"
+                        class="multiselect-custom  w-full" 
+                        display="chip"
+                        (onChange)="onChangeFilter()">
+                    </p-multiSelect>
+                </div>
+    
+                <div class="flex flex-wrap search-candidate-option">
+                    <label 
+                        class="w-full"
+                        for="search-experience">{{'experiencia'|translate}}</label>
+                    <p-multiSelect 
+                        name="experience"
+                        id="search-experience"
+                        [options]="experienceOptions" 
+                        [(ngModel)]="selectedExperience"
+                        [placeholder]="'seleccionar_opcion'|translate"
+                        optionLabel="name" 
+                        optionValue="id"
+                        class="multiselect-custom  w-full" 
+                        display="chip"
+                        (onChange)="onChangeFilter()">
+                    </p-multiSelect>
+                </div>
+    
+                <div class="flex flex-wrap search-candidate-option">
+                    <label 
+                        class="w-full"
+                        for="search-education">{{'educacion'|translate}}</label>
+                    <p-multiSelect 
+                        name="education"
+                        id="search-education"
+                        [options]="educationTypeOptions" 
+                        [(ngModel)]="selectedEducation"
+                        [placeholder]="'seleccionar_opcion'|translate"
+                        optionLabel="name" 
+                        optionValue="name"
+                        class="multiselect-custom  w-full" 
+                        display="chip"
+                        (onChange)="onChangeFilter()">
+                    </p-multiSelect>
+                </div>
+            </div>
+        </form>
+
+        <div class="flex align-items-start justify-content-between mt-5">
+            <div class="w-3 candidate-list">
+                <div *ngFor="let candidate of data">
+                    <app-candidate-card 
+                        [data]="candidate"
+                        [candidateSelectedId]="(candidateSelectedId == candidate.id)"
+                        (selectedCandidate)="selectedCandidate($event)"></app-candidate-card>
+                </div>
+            </div>
+
+            <div class="w-9">
+                <app-candidate-card-detail 
+                    *ngIf="candidateSelected"
+                    [candidateSelected]="candidateSelected"></app-candidate-card-detail>
+            </div>
+        </div>
+    </div>
+</div>

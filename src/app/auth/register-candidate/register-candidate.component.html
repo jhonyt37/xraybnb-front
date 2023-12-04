@@ -1,0 +1,479 @@
+<div class="register-container">
+    <div class="surface-ground flex justify-content-center align-items-center min-h-screen overflow-hidden my-8">
+        <div class="flex flex-column justify-content-center surface-card register-container-card">
+
+            <div class="w-full flex align-items-start justify-content-between px-5 sm:px-8">
+
+                <div class="logos flex align-items-end">
+                    <img 
+                        src="assets/images/logo.png" 
+                        alt="Logo" 
+                        class="logo">
+
+                    <div class="text-center mb-5">
+                        <div class="text-xl font-medium">{{ 'registro' | translate }}</div>
+                        <span>V. 3.0.0</span>
+                        <img 
+                            src="assets/images/nombre.png" 
+                            alt="Nombre empresa" 
+                            class="company-name">
+                    </div>
+                </div>
+
+   
+
+                <div class="register-container__language">
+                    <app-select-language></app-select-language>
+                </div>
+            </div>
+            
+
+            <div class="w-full h-full py-8 px-5 sm:px-8">
+
+                <form [formGroup]="register" (ngSubmit)="onSubmit()">
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_names" 
+                                class="block text-xl font-medium mb-2">{{ 'nombres' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_names" 
+                                        type="text" 
+                                        [placeholder]="'nombres' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (names.invalid && (names.dirty || names.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="names">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="names.invalid && (names.dirty || names.touched)">
+                                    <span *ngIf="names.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+        
+                                    <span *ngIf="names.errors.pattern">
+                                        {{ 'error_formato_texto' | translate }}
+                                    </span>
+
+                                    <span *ngIf="names.errors.maxlength">
+                                        {{ 'longitud_campo' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full ml-3">
+                            <label 
+                                for="register_surnames" 
+                                class="block text-xl font-medium mb-2">{{ 'apellidos' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_surnames" 
+                                        type="text" 
+                                        [placeholder]="'apellidos' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (surnames.invalid && (surnames.dirty || surnames.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="surnames">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="surnames.invalid && (surnames.dirty || surnames.touched)">
+                                    <span *ngIf="surnames.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+        
+                                    <span *ngIf="surnames.errors.pattern">
+                                        {{ 'error_formato_texto' | translate }}
+                                    </span>
+
+                                    <span *ngIf="surnames.errors.maxlength">
+                                        {{ 'longitud_campo' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_id_type" 
+                                class="block text-xl font-medium mb-2">{{ 'tipo_identificacion' | translate }}*</label>
+                            <div class="mb-5">
+                                <p-dropdown 
+                                    id="register_id_type"
+                                    [placeholder]="('seleccionar_opcion' | translate)"
+                                    [options]="idTypesOptions"
+                                    optionValue="id"
+                                    optionLabel="name"
+                                    formControlName="typeIdentificationId"
+                                    [class]="'w-full' + (typeIdentificationId.invalid && (typeIdentificationId.dirty || typeIdentificationId.touched) ? 'ng-dirty' : '')" ></p-dropdown>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="typeIdentificationId.invalid && (typeIdentificationId.dirty || typeIdentificationId.touched)">
+                                    <span *ngIf="typeIdentificationId.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full ml-3">
+                            <label 
+                                for="register_id" 
+                                class="block text-xl font-medium mb-2">{{ 'identificacion' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_id" 
+                                        type="text" 
+                                        [placeholder]="'identificacion' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (identification.invalid && (identification.dirty || identification.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="identification">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="identification.invalid && (identification.dirty || identification.touched)">
+                                    <span *ngIf="identification.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+        
+                                    <span *ngIf="identification.errors.pattern">
+                                        {{ 'error_formato_texto' | translate }}
+                                    </span>
+
+                                    <span *ngIf="identification.errors.maxlength">
+                                        {{ 'longitud_campo' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_phone" 
+                                class="block text-xl font-medium mb-2">{{ 'telefono' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_phone" 
+                                        type="text" 
+                                        [placeholder]="'telefono' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (phone.invalid && (phone.dirty || phone.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="phone">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                                    <span *ngIf="phone.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+        
+                                    <span *ngIf="phone.errors.pattern">
+                                        {{ 'error_formato_calificacion' | translate }}
+                                    </span>
+
+                                    <span *ngIf="phone.errors.maxlength">
+                                        {{ 'longitud_campo' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full ml-3">
+                            <label 
+                                for="register_birth" 
+                                class="block text-xl font-medium mb-2">{{ 'fecha_nacimiento' | translate }}*</label>
+                            <div class="w-full mb-5">
+                                <div class="p-inputgroup w-full">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-user"></i>
+                                    </span>
+                                    <p-calendar 
+                                        styleClass="w-full p-component p-element"
+                                        id="register_birth"
+                                        [maxDate]="maxDate"
+                                        formControlName="dateBirthday"
+                                        required
+                                        [placeholder]="('fecha_nacimiento'|translate)+'*'"></p-calendar>
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="dateBirthday.invalid && (dateBirthday.dirty || dateBirthday.touched)">
+                                    <span *ngIf="dateBirthday.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_country" 
+                                class="block text-xl font-medium mb-2">{{ 'pais' | translate }}*</label>
+                            <div class="mb-5">
+                                <p-dropdown 
+                                    id="register_country"
+                                    [placeholder]="('seleccionar_opcion' | translate)"
+                                    [options]="countriesOptions"
+                                    optionValue="id"
+                                    optionLabel="name"
+                                    formControlName="countryId"
+                                    [class]="'w-full' + (countryId.invalid && (countryId.dirty || countryId.touched) ? 'ng-dirty' : '')" 
+                                    (onChange)="onChangeCountry(countryId.value)"></p-dropdown>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="countryId.invalid && (countryId.dirty || countryId.touched)">
+                                    <span *ngIf="countryId.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full ml-3">
+                            <label 
+                                for="register_region" 
+                                class="block text-xl font-medium mb-2">{{ 'region' | translate }}*</label>
+                            <div class="mb-5">
+                                <p-dropdown 
+                                    id="register_region"
+                                    [placeholder]="('seleccionar_opcion' | translate)"
+                                    [options]="regionOptions"
+                                    optionValue="id"
+                                    optionLabel="name"
+                                    formControlName="regionId"
+                                    [class]="'w-full' + (regionId.invalid && (regionId.dirty || regionId.touched) ? 'ng-dirty' : '')" 
+                                    (onChange)="onChangeRegion(regionId.value)"></p-dropdown>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="regionId.invalid && (regionId.dirty || regionId.touched)">
+                                    <span *ngIf="regionId.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_city" 
+                                class="block text-xl font-medium mb-2">{{ 'ciudad' | translate }}*</label>
+                            <div class="mb-5">
+                                <p-dropdown 
+                                    id="register_city"
+                                    [placeholder]="('seleccionar_opcion' | translate)"
+                                    [options]="cityOptions"
+                                    optionValue="id"
+                                    optionLabel="name"
+                                    formControlName="cityId"
+                                    [class]="'w-full' + (cityId.invalid && (cityId.dirty || cityId.touched) ? 'ng-dirty' : '')" ></p-dropdown>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="cityId.invalid && (cityId.dirty || cityId.touched)">
+                                    <span *ngIf="cityId.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full ml-3">
+                            <label 
+                                for="register_address" 
+                                class="block text-xl font-medium mb-2">{{ 'direccion' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_address" 
+                                        type="text" 
+                                        [placeholder]="'direccion' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (address.invalid && (address.dirty || address.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="address">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="address.invalid && (address.dirty || address.touched)">
+                                    <span *ngIf="address.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+
+                                    <span *ngIf="address.errors.maxlength">
+                                        {{ 'longitud_campo' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="flex justify-content-between">
+                        <div class="w-full mr-3">
+                            <label 
+                                for="register_email" 
+                                class="block text-xl font-medium mb-2">{{ 'correo' | translate }}*</label>
+                            <div class="mb-5">
+                                <div class="p-input-icon-right">
+                                    <input 
+                                        id="register_email" 
+                                        type="text" 
+                                        [placeholder]="'correo' | translate"
+                                        pInputText 
+                                        [class]="'w-full md:w-30rem ' + 
+                                                    (email.invalid && (email.dirty || email.touched) ? 'ng-dirty' : '')"
+                                        style="padding:1rem"
+                                        formControlName="email">
+                                </div>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="email.invalid && (email.dirty || email.touched)">
+                                    <span *ngIf="email.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+        
+                                    <span *ngIf="email.errors.pattern">
+                                        {{ 'correo_incorrecto' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-30rem ml-3">
+                            <label 
+                                for="register_password" 
+                                class="block font-medium text-xl mb-2">{{ 'contrasena' | translate}}</label>
+                            <div class="mb-5 w-full">
+                                <p-password 
+                                    id="register_password" 
+                                    [placeholder]="('contrasena' | translate) + '*'" 
+                                    [toggleMask]="true" 
+                                    [class]="'company-password w-full' + (password.invalid && (password.dirty || password.touched) ? 'ng-dirty' : '')" 
+                                    formControlName="password">
+                                </p-password>
+
+                                <div
+                                    class="error-form"
+                                    *ngIf="password.invalid && (password.dirty || password.touched)">
+                                    <span *ngIf="password.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                    <span *ngIf="password.errors.minlength">
+                                        {{ 'contraseña_representante_longitud' | translate }}
+                                    </span>
+                                    <span *ngIf="password.errors.pattern">
+                                        {{ 'contraseña_representante_formato' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-between">
+                        <div class="w-30rem mr-3">
+                            <label 
+                                for="register_repeat_password" 
+                                class="block text-xl font-medium mb-2">{{ 'repetir_contrasena' | translate }}*</label>
+                            <div class="mb-5">
+                                <p-password 
+                                    id="register_repeat_password" 
+                                    [placeholder]="('repetir_contrasena' | translate) + '*'" 
+                                    [toggleMask]="true" 
+                                    [class]="'company-password w-full md:w-30rem' + (repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched) ? 'ng-dirty' : '')" 
+                                    formControlName="repeatPassword">
+                                </p-password>
+        
+                                <div
+                                    class="error-form"
+                                    *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)">
+                                    <span *ngIf="repeatPassword.errors.required">
+                                        {{ 'campo_obligatorio' | translate }}
+                                    </span>
+                                    <span *ngIf="repeatPassword.errors.minlength">
+                                        {{ 'contraseña_representante_longitud' | translate }}
+                                    </span>
+                                    <span *ngIf="repeatPassword.errors.pattern">
+                                        {{ 'contraseña_representante_formato' | translate }}
+                                    </span>
+                                    <span *ngIf="repeatPassword.errors.confirmPasswordValidator">
+                                        {{ 'no_coincide_contrasena' | translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="register-container__btns">
+                        <button 
+                            pButton 
+                            pRipple 
+                            type="button" 
+                            [label]="'volver' | translate"
+                            class="p-button-outlined mr-5" 
+                            routerLink="/">
+                        </button>
+                        <button 
+                            pButton 
+                            pRipple 
+                            type="button" 
+                            [label]="'registrarme' | translate" 
+                            (click)="onSubmit()">
+                        </button>
+                    </div>
+
+                    <div 
+                        class="mx-auto mt-3 w-6"
+                        *ngIf="loading">
+                        <p-progressBar mode="indeterminate"></p-progressBar>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="register-container__footer">
+        <img src="assets/images/frame.png" alt="">
+    </div>
+</div>
+
+<app-custom-dialog
+        [dataModal]="dataModal"
+        (closeModal)="closeModal($event)"
+        (confirmModal)="confirmModal($event)">
+</app-custom-dialog>

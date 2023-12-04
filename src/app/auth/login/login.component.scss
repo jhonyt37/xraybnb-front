@@ -1,0 +1,55 @@
+:host ::ng-deep .pi-eye,
+:host ::ng-deep .pi-eye-slash {
+    transform:scale(1.6);
+    margin-right: 1rem;
+    color: var(--primary-color) !important;
+}
+:host ::ng-deep .p-password {
+    .p-password-panel {
+        display: none !important;
+    }
+} 
+
+.login-container {
+    position: relative;
+
+    overflow-x: hidden;
+    &-card {
+        min-height: 50vh;
+        height: 100%;
+        padding-top: 2%;
+        position: relative;
+        z-index: 9;
+    }
+
+    &__language {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 2rem;
+        padding-top: 1rem;
+    }
+
+    &__footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .forgot {
+        text-decoration: underline;
+        color: var(--text-color);
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+}

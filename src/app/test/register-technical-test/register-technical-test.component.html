@@ -1,0 +1,110 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 register-result-test-container ">
+        <div class="text-3xl font-medium text-center mb-3">{{ 'registar_resultados_prueba_tecnica' | translate }}</div>
+        <form [formGroup]="registerTechnicalTest">
+            <label class="block text-xl font-medium mb-2 py-2">{{ 'prueba_tecnica' | translate }}*</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <p-dropdown [placeholder]="'seleccionar_opcion' | translate " [options]="technicalTestOptions"
+                        optionValue="id" optionLabel="name" formControlName="technicalTest" (onChange)="onChangeTest(technicalTest.value)"
+                        [class]="(technicalTest!.invalid && (technicalTest!.dirty || technicalTest!.touched) ? 'ng-dirty' : '')"></p-dropdown>
+                </div>
+                <div class="error-form"
+                    *ngIf="technicalTest!.invalid && (technicalTest!.dirty || technicalTest!.touched)">
+                    <span *ngIf="technicalTest!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                </div>
+            </div>
+            <label class="block text-xl font-medium mb-2">{{ 'candidato' | translate }}*</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <p-dropdown [placeholder]="'seleccionar_opcion' | translate " [options]="candidateOptions"
+                        optionValue="id" optionLabel="totalName" formControlName="candidate"
+                        [class]="(candidate!.invalid && (candidate!.dirty || candidate!.touched) ? 'ng-dirty' : '')"></p-dropdown>
+                </div>
+                <div class="error-form" *ngIf="candidate!.invalid && (candidate!.dirty || candidate!.touched)">
+                    <span *ngIf="candidate!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                </div>
+            </div>
+            <label class="block text-xl font-medium mb-2">{{ 'estado' | translate }}*</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <p-dropdown [placeholder]="'seleccionar_opcion' | translate " [options]="stateOptions"
+                        optionValue="value" optionLabel="state" formControlName="state"
+                        [class]="(state!.invalid && (state!.dirty || state!.touched) ? 'ng-dirty' : '')"></p-dropdown>
+                </div>
+                <div class="error-form" *ngIf="state!.invalid && (state!.dirty || state!.touched)">
+                    <span *ngIf="state!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                </div>
+            </div>
+            <label for="qualification" class="block text-xl font-medium mb-2">{{ 'calificacion' | translate }}*</label>
+            <span>{{ 'mensaje_ayuda_calificacion' | translate }}</span>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input id="qualification" type="text" [placeholder]="'calificacion' | translate " pInputText
+                        [class]="'w-full ' + 
+                        (qualification!.invalid && (qualification!.dirty || qualification!.touched) ? 'ng-dirty' : '')"
+                        style="padding:1rem" formControlName="qualification">
+                </div>
+
+                <div class="error-form"
+                    *ngIf="qualification!.invalid && (qualification!.dirty || qualification!.touched)">
+                    <span *ngIf="qualification!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                    <span *ngIf="qualification!.errors!.min || qualification!.errors!.max">
+                        {{ 'maximo_minimo_calificacion' | translate }}
+                    </span>
+                    <span *ngIf="qualification!.errors!.pattern">
+                        {{ 'error_formato_calificacion' | translate }}
+                    </span>
+                </div>
+            </div>
+            <label for="observations" class="block text-xl font-medium mb-2">{{ 'observaciones' | translate }}*</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input id="observations" type="text" [placeholder]="'observaciones' | translate " pInputText
+                        [class]="'w-full ' + 
+                        (observations!.invalid && (observations!.dirty || observations!.touched) ? 'ng-dirty' : '')"
+                        style="padding:1rem" formControlName="observations">
+                </div>
+
+                <div class="error-form" *ngIf="observations!.invalid && (observations!.dirty || observations!.touched)">
+                    <span *ngIf="observations!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                    <span *ngIf="observations!.errors!.maxlength">
+                        {{ 'maximo_observaciones' | translate }}
+                    </span>
+                </div>
+            </div>
+            <div class="flex justify-content-end">
+                <button 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    [label]="('cancelar' | translate)" 
+                    class="p-button-outlined mr-5" 
+                    [routerLink]="['/']">
+                </button>
+                <button pButton pRipple type="button" [label]="'guardar' | translate"
+                    [disabled]="registerTechnicalTest.invalid" (click)="onSubmit()">
+                </button>
+            </div>
+
+            <div 
+                class="mx-auto mt-3 w-6"
+                *ngIf="loading">
+                <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+            
+        </form>
+    </div>
+</div>
+<app-custom-dialog [dataModal]="dataModal" (closeModal)="closeModal($event)" (confirmModal)="confirmModal($event)">
+</app-custom-dialog> 

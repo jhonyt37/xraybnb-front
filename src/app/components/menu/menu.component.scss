@@ -1,0 +1,35 @@
+.layout-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &__logo {
+    flex: 1;
+
+    &-image {
+      img {
+        width: 76px;
+      }
+    }
+
+    &-txt {
+      img {
+        width: 150px;
+      }
+
+      p {
+        color: var(--surface-a);
+      }
+    }
+  }
+
+  &__menu {
+    flex: 20;
+  }
+
+  &__footer {
+    flex: 1;
+    background-color: var(--surface-506981);
+    color: var(--error-color);
+  }
+}

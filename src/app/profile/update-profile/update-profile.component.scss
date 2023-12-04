@@ -1,0 +1,13 @@
+.update-profile {
+    ::ng-deep {
+        .p-dropdown {
+            width: 100%;
+        }
+        .p-multiselect {
+            width: 100%;
+        }
+    }
+    .col-12 {
+        padding: 0px
+    }
+}

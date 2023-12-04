@@ -1,0 +1,114 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 w-9">
+        <div class="text-3xl font-medium mb-3">{{'crear_proyecto' | translate}}</div>
+        <form [formGroup]="registerProject" (ngSubmit)="onSubmit()">
+            <div class="mb-6">
+                <label
+                        for="project_name"
+                        class="block text-xl font-medium mb-2">{{'nombre_proyecto' | translate}}</label>
+                <div class="w-full">
+                    <input
+                            id="project_name"
+                            type="text"
+                            [placeholder]="('nombre_proyecto' | translate)+'*'"
+                            pInputText
+                            [class]="'w-full ' +
+                            (projectName.invalid && (projectName.dirty || projectName.touched) ? 'ng-dirty' : '')"
+                            style="padding:1rem"
+                            formControlName="projectName">
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)">
+                    <span *ngIf="projectName.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                    <span *ngIf="projectName.errors.maxlength">
+                    {{'nombre_proyecto_maximo_100_caracteres'| translate}}
+                </span>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label
+                        for="description"
+                        class="block text-xl font-medium mb-2">{{'descripcion'|translate}}</label>
+                <div class="w-full">
+                            <textarea
+                                    class="w-full"
+                                    id="description"
+                                    pInputTextarea
+                                    formControlName="projectDescription"
+                                    required
+                                    [placeholder]="('descripcion'|translate)+'*'"
+                            ></textarea>
+                </div>
+                <div
+                        class="error-form"
+                        *ngIf="projectDescription.invalid && (projectDescription.dirty || projectDescription.touched)">
+                            <span *ngIf="projectDescription.errors.required">
+                                {{'campo_obligatorio' | translate}}
+                            </span>
+                    <span *ngIf="projectDescription.errors.maxlength">
+                                {{'descripcion_maximo_200_caracteres'| translate}}
+                            </span>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label
+                        for="date"
+                        class="block text-xl font-medium mb-2">{{'fecha'|translate}}</label>
+                <div class="w-full">
+                    <div class="p-inputgroup w-full">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-user"></i>
+                        </span>
+                        <p-calendar styleClass="w-full p-component p-element"
+                                    id="date"
+                                    [minDate]="minDate"
+                                    formControlName="projectDate"
+                                    required
+                                    [placeholder]="('fecha'|translate)+'*'"></p-calendar>
+                    </div>
+                </div>
+                <div
+                        class="error-form"
+                        *ngIf="projectDate.invalid && (projectDate.dirty || projectDate.touched)">
+                            <span *ngIf="projectDate.errors.required">
+                                {{'campo_obligatorio' | translate}}
+                            </span>
+                </div>
+            </div>
+            <div class="flex justify-content-end">
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'cancelar'|translate"
+                        class="p-button-outlined mr-5"
+                        [routerLink]="['/']">
+                </button>
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'crear'|translate"
+                        (click)="onSubmit()">
+                </button>
+            </div>
+
+            <div 
+                class="mx-auto mt-3 w-6"
+                *ngIf="loading">
+                <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-custom-dialog
+        [dataModal]="dataModal"
+        (closeModal)="closeModal($event)"
+        (confirmModal)="confirmModal($event)">
+</app-custom-dialog>

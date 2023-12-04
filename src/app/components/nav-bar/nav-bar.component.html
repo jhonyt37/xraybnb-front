@@ -1,0 +1,16 @@
+<div class="layout-topbar">
+    <div #topbarmenu class="layout-topbar-menu p-3">
+        <div class="layout-topbar-menu__option">
+            <app-select-language></app-select-language>
+        </div>
+
+        <div class="layout-topbar-menu__option surface-card ml-3 p-1 session-card">
+
+            <p-avatar image="{{user.picture}}" styleClass="mr-2" size="large" shape="square"></p-avatar>
+            <div>
+                <p>{{user.name}}</p>
+                <span>{{user.rol}}</span>
+            </div>
+        </div>
+    </div>
+</div>

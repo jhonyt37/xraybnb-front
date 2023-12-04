@@ -1,0 +1,21 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/spec",
+        "lib": [
+            "ES2022",
+            "dom"
+        ],
+        "types": [
+            "jest"
+        ],
+        "module": "commonjs"
+    },
+    "include": [
+        "src/**/*.spec.ts",
+        "src/**/*.d.ts"
+    ],
+    "useDefineForClassFields": true,
+    "skipLibCheck": true
+}

@@ -1,0 +1,31 @@
+<p-dialog
+        [header]="data.typeModal"
+        [(visible)]="data.displayModal"
+        [modal]="true"
+        showEffect="fade"
+        [style]="{width: '30vw'}"
+        [breakpoints]="{'960px': '75vw'}">
+    <div class="custom-modal-content">
+        <i
+                [class]="'pi ' +
+            (data.typeModal === 'Error' ? 'error ' : '') +
+            ((data.typeModal === 'Confirmación' || data.typeModal === 'Confirmation') ? 'success ' : '') +
+            (data.iconModal ? data.iconModal : '')"></i>
+        <p class="line-height-3 ml-2">
+            {{data.textModal}}
+        </p>
+    </div>
+    <ng-template pTemplate="footer">
+        <button
+          pButton
+          (click)="closeDialog()"
+          [class]="(data.typeModal === 'Confirmación' || data.typeModal === 'Confirmation') ? 'p-button-outlined' : ''"
+          [label]="(data.typeModal === 'Confirmación' || data.typeModal === 'Confirmation') ? ('cancelar'|translate) : ('ok'| translate)"></button>
+        <button
+          id="btnConfirm"
+          *ngIf="(data.typeModal === 'Confirmación' || data.typeModal === 'Confirmation')"
+          pButton
+          (click)="confirmDialog()"
+          [label]="'aceptar'|translate"></button>
+    </ng-template>
+</p-dialog>

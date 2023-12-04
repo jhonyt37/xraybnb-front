@@ -1,0 +1,25 @@
+.language-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+}
+
+.selected-language {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.selected-language-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}

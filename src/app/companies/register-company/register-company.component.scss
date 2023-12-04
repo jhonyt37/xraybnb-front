@@ -1,0 +1,20 @@
+.register-company-container {
+    width: 80%;
+}
+
+::ng-deep {
+    .company-password {
+        .p-password,
+        .p-inputtext {
+            width: 100%;
+        }
+    }
+
+    .p-password-panel {
+        display: none !important;
+    }
+
+    .p-dropdown {
+        width: 100%;
+    }
+}

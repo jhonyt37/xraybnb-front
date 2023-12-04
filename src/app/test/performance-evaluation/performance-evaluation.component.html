@@ -1,0 +1,187 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 w-9">
+        <div class="text-3xl font-medium mb-3">{{'evaluacion_desempenio' | translate}}</div>
+        <form [formGroup]="performanceEval" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="project">{{'proyecto'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown
+                            [placeholder]="('seleccionar_opcion' | translate)"
+                            [options]="projectOptions"
+                            optionValue="id"
+                            optionLabel="name"
+                            formControlName="projectId"
+                            [class]="(projectId.invalid && (projectId.dirty || projectId.touched) ? 'ng-dirty' : '')"
+                            (onChange)="onChangeProject(projectId.value)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="projectId.invalid && (projectId.dirty || projectId.touched)">
+                    <span *ngIf="projectId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="team">{{'equipo'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown
+                            [placeholder]="('seleccionar_opcion' | translate)"
+                            [options]="teamsOptions"
+                            optionValue="id"
+                            optionLabel="name"
+                            formControlName="teamId"
+                            [class]="(teamId.invalid && (teamId.dirty || teamId.touched) ? 'ng-dirty' : '')"
+                            [emptyMessage]="('sin_equipos' | translate)"
+                            (onChange)="onChangeTeam(teamId.value)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="teamId.invalid && (teamId.dirty || teamId.touched)">
+                    <span *ngIf="teamId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="search-candidate">{{'candidato'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown
+                            [placeholder]="('seleccionar_opcion' | translate)"
+                            [options]="candidateOptions"
+                            optionValue="id"
+                            optionLabel="userName"
+                            formControlName="candidateId"
+                            [class]="(candidateId.invalid && (candidateId.dirty || candidateId.touched) ? 'ng-dirty' : '')"
+                            [emptyMessage]="('sin_equipos' | translate)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="candidateId.invalid && (candidateId.dirty || candidateId.touched)">
+                    <span *ngIf="candidateId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="search-candidate">{{'dimension'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown
+                            [placeholder]="('seleccionar_opcion' | translate)"
+                            [options]="dimensionOptions"
+                            optionValue="id"
+                            optionLabel="name"
+                            formControlName="dimensionId"
+                            [class]="(dimensionId.invalid && (dimensionId.dirty || dimensionId.touched) ? 'ng-dirty' : '')"
+                            [emptyMessage]="('sin_equipos' | translate)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="dimensionId.invalid && (dimensionId.dirty || dimensionId.touched)">
+                    <span *ngIf="dimensionId.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="search-candidate">{{'desempenio'|translate}}</label>
+
+                <div class="w-full">
+                    <p-dropdown
+                            [placeholder]="('seleccionar_opcion' | translate)"
+                            [options]="performanceOptions"
+                            optionValue="name"
+                            optionLabel="name"
+                            formControlName="performance"
+                            [class]="(performance.invalid && (performance.dirty || performance.touched) ? 'ng-dirty' : '')"
+                            [emptyMessage]="('sin_equipos' | translate)">
+                    </p-dropdown>
+                </div>
+
+                <div
+                        class="error-form"
+                        *ngIf="performance.invalid && (performance.dirty || performance.touched)">
+                    <span *ngIf="performance.errors.required">
+                        {{'campo_obligatorio' | translate}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label
+                        class="w-full block text-xl font-medium mb-2"
+                        for="search-candidate">{{'observaciones'|translate}}</label>
+
+                <div class="w-full">
+                    <input id="observations" type="text" [placeholder]="'observaciones' | translate " pInputText
+                           [class]="'w-full ' +
+                        (observations!.invalid && (observations!.dirty || observations!.touched) ? 'ng-dirty' : '')"
+                           style="padding:1rem" formControlName="observations">
+                </div>
+
+                <div class="error-form"
+                     *ngIf="observations!.invalid && (observations!.dirty || observations!.touched)">
+                    <span *ngIf="observations!.errors!.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end">
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'cancelar'|translate"
+                        class="p-button-outlined mr-5"
+                        [routerLink]="['/']">
+                </button>
+                <button
+                        pButton
+                        pRipple
+                        type="button"
+                        [label]="'guardar'|translate"
+                        (click)="onSubmit()">
+                </button>
+            </div>
+
+            <div
+                    class="mx-auto mt-3 w-6"
+                    *ngIf="loading">
+                <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-custom-dialog
+        [dataModal]="dataModal"
+        (closeModal)="closeModal($event)"
+        (confirmModal)="confirmDialog($event)">
+</app-custom-dialog>

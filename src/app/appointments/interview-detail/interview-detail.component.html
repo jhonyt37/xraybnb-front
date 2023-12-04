@@ -1,0 +1,79 @@
+<div class="flex justify-content-center mt-5">
+  <div class="flex flex-column justify-content-center surface-card p-5 w-9">
+    <div id="title_result_interview" class="text-3xl font-medium mb-3">{{'resultado_entrevista' | translate}}</div>
+
+    <div *ngIf="showError">
+      <p>{{'sin_notas' | translate}}</p>
+    </div>
+    
+    <div *ngIf="!showError">
+      <div class="flex justify-content-between mb-3">
+        <div class="flex w-6">
+          <p class="mb-0 mr-2">
+            <strong>
+              {{'nombre_candidato' | translate}}
+            </strong>
+          </p>
+  
+          <p class="mb-0">
+            {{detailInterview?.appointment.candidateName}}
+          </p>
+        </div>
+  
+        <div class="flex w-6">
+          <p class="mb-0 mr-2">
+            <strong>
+              {{'fecha' | translate}}
+            </strong>
+          </p>
+  
+          <p class="mb-0">
+            {{detailInterview?.appointment.date | date: 'dd-MM-yyyy hh:mm a'}}
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <p class="m-auto">
+          <strong>
+            {{'notas' | translate}}
+          </strong>
+        </p>
+  
+        <div class="border-solid border-500 border-1 border-round-sm p-2">
+          <p class="m-auto">
+            {{detailInterview?.notes}}
+          </p>
+        </div>
+  
+      </div>
+
+      <div>
+        <p class="m-auto">
+          <strong>
+            {{'conclusiones' | translate}}
+          </strong>
+        </p>
+  
+        <div class="border-solid border-500 border-1 border-round-sm p-2">
+          <p class="m-auto">
+            {{detailInterview?.conclusions}}
+          </p>
+        </div>
+  
+      </div>
+    </div>
+
+    <div class="flex justify-content-end mt-5">
+      <button
+              pButton
+              pRipple
+              type="button"
+              [label]="'volver'|translate"
+              class="p-button-outlined"
+              [routerLink]="['/listar-citas']">
+      </button>
+    </div>
+
+  </div>
+</div>

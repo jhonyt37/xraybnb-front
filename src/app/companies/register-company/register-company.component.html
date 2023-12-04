@@ -1,0 +1,384 @@
+<div class="flex justify-content-center mt-5">
+    <div class="flex flex-column justify-content-center surface-card p-5 register-company-container">
+        <div class="text-3xl font-medium mb-3" id="title-form">{{ 'registro_empresa' | translate }}</div>
+
+        <form [formGroup]="registerCompany" (ngSubmit)="onSubmit()">
+            <label 
+                for="company_name" 
+                class="block text-xl font-medium mb-2">{{ 'nombre_empresa' | translate }}</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input 
+                        id="company_name" 
+                        type="text" 
+                        [placeholder]="('nombre_empresa' | translate) + '*'" 
+                        pInputText 
+                        [class]="'w-full ' + 
+                                (companyName.invalid && (companyName.dirty || companyName.touched) ? 'ng-dirty' : '')" 
+                        style="padding:1rem"
+                        formControlName="companyName">
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)">
+                    <span *ngIf="companyName.errors.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                    <span *ngIf="companyName.errors.maxlength">
+                        {{ 'longitud_campo' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex w-full gap-5">
+                <div class="w-6">
+                    <label 
+                        for="company_id" 
+                        class="block text-xl font-medium mb-2">{{ 'identificacion_empresa' | translate }}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <input 
+                                id="company_id" 
+                                type="text" 
+                                [placeholder]="('identificacion_empresa' | translate) + '*'" 
+                                pInputText 
+                                [class]="'w-full ' + 
+                                        (uniqueIdentification.invalid && (uniqueIdentification.dirty || uniqueIdentification.touched) ? 'ng-dirty' : '')" 
+                                style="padding:1rem"
+                                formControlName="uniqueIdentification">
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="uniqueIdentification.invalid && (uniqueIdentification.dirty || uniqueIdentification.touched)">
+                            <span *ngIf="uniqueIdentification.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                            <span *ngIf="uniqueIdentification.errors.minlength">
+                                {{ 'identificacion_empresa_longitud' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-6">
+                    <label 
+                        for="company_business" 
+                        class="block text-xl font-medium mb-2">{{ 'actividad_comercial' | translate }}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <input 
+                                id="company_business" 
+                                type="text" 
+                                [placeholder]="('actividad_comercial' | translate) + '*'" 
+                                pInputText 
+                                [class]="'w-full ' + 
+                                        (businessActivity.invalid && (businessActivity.dirty || businessActivity.touched) ? 'ng-dirty' : '')" 
+                                style="padding:1rem"
+                                formControlName="businessActivity">
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="businessActivity.invalid && (businessActivity.dirty || businessActivity.touched)">
+                            <span *ngIf="businessActivity.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                            <span *ngIf="businessActivity.errors.minlength">
+                                {{ 'actividad_comercial_longitud' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <label 
+                for="company_email" 
+                class="block text-xl font-medium mb-2">{{ 'correo' | translate }}</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input 
+                        id="company_email" 
+                        type="text" 
+                        [placeholder]="('correo' | translate) + '*'" 
+                        pInputText 
+                        [class]="'w-full ' + 
+                                (companyEmail.invalid && (companyEmail.dirty || companyEmail.touched) ? 'ng-dirty' : '')" 
+                        style="padding:1rem"
+                        formControlName="companyEmail">
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="companyEmail.invalid && (companyEmail.dirty || companyEmail.touched)">
+                    <span *ngIf="companyEmail.errors.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+
+                    <span *ngIf="companyEmail.errors.pattern">
+                        {{ 'correo_incorrecto' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <label 
+                for="company_name_representative" 
+                class="block text-xl font-medium mb-2">{{ 'nombre_representate' | translate }}</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input 
+                        id="company_name_representative" 
+                        type="text" 
+                        [placeholder]="('nombre_representate' | translate) + '*'" 
+                        pInputText 
+                        [class]="'w-full ' + 
+                                (representativeName.invalid && (representativeName.dirty || representativeName.touched) ? 'ng-dirty' : '')" 
+                        style="padding:1rem"
+                        formControlName="representativeName">
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="representativeName.invalid && (representativeName.dirty || representativeName.touched)">
+                    <span *ngIf="representativeName.errors.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                    <span *ngIf="representativeName.errors.minlength">
+                        {{ 'nombre_representate_longitud' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex w-full gap-5">
+                <div class="w-6">
+                    <label 
+                        for="company_email_representative" 
+                        class="block text-xl font-medium mb-2">{{ 'correo_representante' | translate}}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <input 
+                                id="company_email_representative" 
+                                type="text" 
+                                [placeholder]="('correo_representante' | translate) + '*'" 
+                                pInputText 
+                                [class]="'w-full ' + 
+                                        (representativeEmail.invalid && (representativeEmail.dirty || representativeEmail.touched) ? 'ng-dirty' : '')" 
+                                style="padding:1rem"
+                                formControlName="representativeEmail">
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="representativeEmail.invalid && (representativeEmail.dirty || representativeEmail.touched)">
+                            <span *ngIf="representativeEmail.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                            <span *ngIf="representativeEmail.errors.pattern">
+                                {{ 'correo_incorrecto' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-6">
+                    <label 
+                        for="company_representative_password" 
+                        class="block font-medium text-xl mb-2">{{ 'contraseña_representante' | translate}}</label>
+                    <div class="mb-5 w-full">
+                        <p-password 
+                            id="company_representative_password" 
+                            [placeholder]="('contraseña_representante' | translate) + '*'" 
+                            [toggleMask]="true" 
+                            [class]="'company-password w-full' + (representativePassword.invalid && (representativePassword.dirty || representativePassword.touched) ? 'ng-dirty' : '')" 
+                            formControlName="representativePassword">
+                        </p-password>
+
+                        <div
+                            class="error-form"
+                            *ngIf="representativePassword.invalid && (representativePassword.dirty || representativePassword.touched)">
+                            <span *ngIf="representativePassword.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                            <span *ngIf="representativePassword.errors.minlength">
+                                {{ 'contraseña_representante_longitud' | translate }}
+                            </span>
+                            <span *ngIf="representativePassword.errors.pattern">
+                                {{ 'contraseña_representante_formato' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <label 
+                for="company_phone" 
+                class="block text-xl font-medium mb-2">{{'telefono' | translate}}</label>
+            <div class="mb-5">
+                <div class="w-full">
+                    <input 
+                        id="company_phone" 
+                        type="text" 
+                        [placeholder]="('telefono' | translate) + '*'" 
+                        pInputText 
+                        [class]="'w-full ' + 
+                                (phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched) ? 'ng-dirty' : '')" 
+                        style="padding:1rem"
+                        formControlName="phoneNumber">
+                </div>
+
+                <div
+                    class="error-form"
+                    *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+                    <span *ngIf="phoneNumber.errors.required">
+                        {{ 'campo_obligatorio' | translate }}
+                    </span>
+                    <span *ngIf="phoneNumber.errors.maxlength">
+                        {{'telefono_longitud' | translate}}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex w-full gap-5">
+                <div class="w-6">
+                    <label 
+                        for="company_country" 
+                        class="block text-xl font-medium mb-2">{{'pais' | translate}}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <p-dropdown 
+                                [placeholder]="('seleccionar_opcion' | translate)"
+                                [options]="countriesOptions"
+                                optionValue="id"
+                                optionLabel="name"
+                                formControlName="country"
+                                [class]="(country.invalid && (country.dirty || country.touched) ? 'ng-dirty' : '')" 
+                                (onChange)="onChangeCountry(country.value)"></p-dropdown>
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="country.invalid && (country.dirty || country.touched)">
+                            <span *ngIf="country.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-6">
+                    <label 
+                        for="company_region" 
+                        class="block text-xl font-medium mb-2">{{'region' | translate}}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <p-dropdown 
+                                [placeholder]="('seleccionar_opcion' | translate)"
+                                [options]="regionOptions"
+                                optionValue="id"
+                                optionLabel="name"
+                                formControlName="region"
+                                [class]="(region.invalid && (region.dirty || region.touched) ? 'ng-dirty' : '')" 
+                                (onChange)="onChangeRegion(region.value)"></p-dropdown>
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="region.invalid && (region.dirty || region.touched)">
+                            <span *ngIf="region.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex w-full gap-5">
+                <div class="w-6">
+                    <label 
+                        for="company_city" 
+                        class="block text-xl font-medium mb-2">{{'ciudad' | translate}}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <p-dropdown 
+                                [placeholder]="('seleccionar_opcion' | translate)"
+                                [options]="cityOptions"
+                                optionValue="id"
+                                optionLabel="name"
+                                formControlName="city"
+                                [class]="(city.invalid && (city.dirty || city.touched) ? 'ng-dirty' : '')" ></p-dropdown>
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="city.invalid && (city.dirty || city.touched)">
+                            <span *ngIf="city.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-6">
+                    <label 
+                        for="company_address" 
+                        class="block text-xl font-medium mb-2">{{'direccion' | translate}}</label>
+                    <div class="mb-5">
+                        <div class="w-full">
+                            <input 
+                                id="company_address" 
+                                type="text" 
+                                [placeholder]="('direccion' | translate) + '*'" 
+                                pInputText 
+                                [class]="'w-full ' + 
+                                        (address.invalid && (address.dirty || address.touched) ? 'ng-dirty' : '')" 
+                                style="padding:1rem"
+                                formControlName="address">
+                        </div>
+
+                        <div
+                            class="error-form"
+                            *ngIf="address.invalid && (address.dirty || address.touched)">
+                            <span *ngIf="address.errors.required">
+                                {{ 'campo_obligatorio' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-content-end">
+                <button 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    [label]="('cancelar' | translate)" 
+                    class="p-button-outlined mr-5" 
+                    [routerLink]="['/']">
+                </button>
+                <button 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    [label]="('guardar' | translate)" 
+                    (click)="onSubmit()">
+                </button>
+            </div>
+
+            <div 
+                class="mx-auto mt-3 w-6"
+                *ngIf="loading">
+                <p-progressBar mode="indeterminate"></p-progressBar>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<app-custom-dialog
+        [dataModal]="dataModal"
+        (closeModal)="closeModal($event)"
+        (confirmModal)="confirmModal($event)">
+</app-custom-dialog>
